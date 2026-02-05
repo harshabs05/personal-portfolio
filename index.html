@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harsha B S | Professional Portfolio</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --dark: #0f172a;
+            --glass: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            margin: 0;
+            background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navigation Boxes */
+        nav {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-box {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            padding: 15px 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-box:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            width: 90%;
+            margin-bottom: 50px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        }
+
+        .tagline {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Info Grid (Skills & Achievements) */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--secondary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: rgba(99, 102, 241, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid var(--primary);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 24px;
+            max-width: 500px;
+            width: 85%;
+            position: relative;
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 28px;
+            color: #94a3b8;
+        }
+
+        .project-list li {
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 3px solid var(--primary);
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-box" onclick="showModal('projects')">🚀 Projects</div>
+        <div class="nav-box" onclick="showModal('education')">🎓 Education</div>
+        <div class="nav-box" onclick="showModal('contact')">📩 Contact</div>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Harsha B S</h1>
+            <p class="tagline">BCA Final Year Student | Tech Enthusiast</p>
+            <p style="color: #cbd5e1; max-width: 700px; margin: 20px auto;">
+                Aspiring software developer focused on creating intuitive user experiences and robust backend logic. 
+                Always learning, currently exploring Cloud Computing and Full-stack patterns.
+            </p>
+        </section>
+
+        <div class="info-grid">
+            <div class="card">
+                <h3>Technical Skills</h3>
+                <div class="skill-tags">
+                    <span class="tag">Java</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">HTML/CSS</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">Git & GitHub</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Highlights</h3>
+                <ul style="padding-left: 20px; margin: 0;">
+                    <li>Successfully completed 3+ Academic Projects.</li>
+                    <li>Consistent 8.0 CGPA throughout BCA.</li>
+                    <li>Participated in Inter-College Coding Hackathons.</li>
+                    <li>Certified in Web Development Foundations.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal" onclick="if(event.target == this) closeModal()">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        const data = {
+            projects: `
+                <h2 style="color:var(--primary)">My Projects</h2>
+                <ul class="project-list">
+                    <li><strong>E-Commerce UI:</strong> A responsive frontend built with React for seamless shopping experiences.</li>
+                    <li><strong>Attendance Management:</strong> A Python-based system with MySQL for efficient college tracking.</li>
+                    <li><strong>Smart Portfolio:</strong> An interactive, glassmorphism-themed digital resume.</li>
+                </ul>
+            `,
+            education: `
+                <h2 style="color:var(--primary)">Education</h2>
+                <div class="edu-list">
+                    <p><strong>Bachelor of Computer Applications (BCA)</strong></p>
+                    <p>Banglore city university</p>
+                    <p>Final Year | 2023 - 2026</p>
+                    <p><strong>Academic Performance:</strong> 8.0 CGPA</p>
+                </div>
+            `,
+            contact: `
+                <h2 style="color:var(--primary)">Get In Touch</h2>
+    <p>📬 <strong>Email:</strong> <br> <a href="mailto:harshabs0550@gmail.com" style="color:white; text-decoration:none;">harshabs0550@gmail.com</a></p>
+    <p>🔗 <strong>LinkedIn:</strong> <br> <a href="https://linkedin.com/in/harshabs05" target="_blank" style="color:white; text-decoration:none;">linkedin.com/in/harshabs05</a></p>
+    <p>💻 <strong>GitHub:</strong> <br> <a href="https://github.com/harshabs05" target="_blank" style="color:white; text-decoration:none;">github.com/harshabs05</a></p>
+    <p>📍 <strong>Location:</strong> <br> Bangalore, Karnataka, India</p>
+            `
+        };
+
+        function showModal(type) {
+            const modalBody = document.getElementById('modal-body');
+            modalBody.innerHTML = data[type];
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
